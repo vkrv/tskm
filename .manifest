@@ -1,0 +1,5 @@
+{
+	"platforms": ["html5"],
+	"apps": {"main": "index"},
+	"languages": ["en", "ru"]
+}
