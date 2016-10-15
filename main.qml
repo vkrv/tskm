@@ -8,19 +8,18 @@ Item {
 
 	ListModel {
 		id: bubblesModel;
-		property Object root: bubble1;
 
 		addBubble(x, y, r): {
 			this.append({
 				x: x,
 				y: y,
-				root: this.root
+				root: r
 				})
 		}
 
 		ListElement { x: 300; y: 100; root: bubble1;}
-		// ListElement { x: 300; y: 300; root: bubble1;}
-		// ListElement { x: 300; y: 500; root: bubble1;}
+		ListElement { x: 300; y: 300; root: bubble1;}
+		ListElement { x: 300; y: 500; root: bubble1;}
 	}
 
 	Repeater {
@@ -32,6 +31,10 @@ Item {
 			y: model.y;
 			root: model.root;
 			curve.target: drawer;
+			onCreateBubble: {
+				log("bubble delegate on creation")
+				this.parent.model.addBubble(this.x + 300, this.y, this)
+			}
 		}
 	}
 
@@ -40,21 +43,21 @@ Item {
 		anchors.verticalCenter: parent.verticalCenter;
 		x: 30;
 		drag.direction: DragMixin.Vertical;
-		onClicked: {
+		onCreateBubble: {
 			log("bubble clicked")
 			bubblegen.model.addBubble(this.x + 300, this.y, this)
 		}
 	}
 
 
-	MindBubble {
-		id: bubble2;
-		anchors.verticalCenter: parent.verticalCenter;
-		x: 330;
-		root: bubble1;
-		curve.target: drawer;
-		drag.direction: DragMixin.Horizontal;
-	}
+	// MindBubble {
+	// 	id: bubble2;
+	// 	anchors.verticalCenter: parent.verticalCenter;
+	// 	x: 330;
+	// 	root: bubble1;
+	// 	curve.target: drawer;
+	// 	drag.direction: DragMixin.Horizontal;
+	// }
 
 	// MindBubble {
 	// 	id: bubble3;
