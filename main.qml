@@ -39,6 +39,7 @@ Item {
 		id: bubble1;
 		anchors.verticalCenter: parent.verticalCenter;
 		x: 30;
+		drag.direction: DragMixin.Vertical;
 		onClicked: {
 			log("bubble clicked")
 			bubblegen.model.addBubble(this.x + 300, this.y, this)
@@ -46,13 +47,14 @@ Item {
 	}
 
 
-	// MindBubble {
-	// 	id: bubble2;
-	// 	anchors.verticalCenter: parent.verticalCenter;
-	// 	x: 330;
-	// 	root: bubble1;
-	// 	curve.target: drawer;
-	// }
+	MindBubble {
+		id: bubble2;
+		anchors.verticalCenter: parent.verticalCenter;
+		x: 330;
+		root: bubble1;
+		curve.target: drawer;
+		drag.direction: DragMixin.Horizontal;
+	}
 
 	// MindBubble {
 	// 	id: bubble3;
